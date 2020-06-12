@@ -34,8 +34,9 @@ This repo consists of helper functions for me, maybe they could help you aswell.
     cat_vars = [ var for var in data.columns if data[var].dtypes == ‘O’]
 **Using joblib to save models and pipelines**
 
-    from sklearn.externals import joblib
+    import joblib
     joblib.dump(pipeline, 'model.joblib')
+    joblib_model = joblib.load('model.joblib')
 **Using pickle to save models and pipelines**
 
     import pickle
