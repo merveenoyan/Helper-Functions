@@ -4,18 +4,21 @@
 
 This repo consists of helper functions for me, maybe they could help you aswell.
 
+## Exploratory Data Analysis
 **Heat map with annotations**
 
     correlation = df.corr().abs()
     plt.figure(figsize=(8,8))
     sns.heatmap(correlation, annot=True)
     plt.show()
+## Feature Selection
 **Feature Selection with SelectKBest**
 
     from sklearn.feature_selection import SelectKBest
     kbest = SelectKBest(k=5)
     k_best_features = kbest.fit_transform(features, target)
     list(df.columns[kbest.get_support (indices=True)])
+## Preprocessing
 **Concatenate One Hot Encoded Categorical Variables**
 
     df = pd.concat([df,pd.get_dummies(df["col"],prefix="col")], axis=1)
@@ -32,6 +35,7 @@ This repo consists of helper functions for me, maybe they could help you aswell.
 **Get list of categorical variables**
 
     cat_vars = [ var for var in data.columns if data[var].dtypes == ‘O’]
+## Deployment
 **Using joblib to save models and pipelines**
 
     import joblib
