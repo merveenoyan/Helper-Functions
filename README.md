@@ -27,8 +27,11 @@ list(df.columns[kbest.get_support(indices=True)])
 ## Preprocessing
 **Concatenate One Hot Encoded Categorical Variables**
 ```python
-df = pd.concat([df, pd.get_dummies(df["col"], prefix="col")], axis=1)
-df.drop(["col"], axis=1, inplace=True)
+#select the variables to encode first
+cols_to_encode = df.select_dtypes(include="object")
+for col in cols_to_encode:
+  df = pd.concat([df, pd.get_dummies(df[col], prefix="%s"%col)], axis=1)
+  df.drop([col], axis=1, inplace=True)
 ```
 
 **Scaling**
@@ -47,6 +50,8 @@ num_vars = [ var for var in data.columns if data[var].dtypes != ‘O’]
 **Get list of categorical variables**
 ```python
 cat_vars = [var for var in data.columns if data[var].dtypes == ‘O’]
+#or
+cols_to_encode = df.select_dtypes(include="object")
 ```
 
 ## Deployment
